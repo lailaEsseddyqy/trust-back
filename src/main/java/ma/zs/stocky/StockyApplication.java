@@ -9,6 +9,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.client.RestTemplate;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,8 @@ import javax.mail.MessagingException;
 
 @SpringBootApplication
 //@EnableFeignClients
+@EnableScheduling
+
 public class StockyApplication {
     public static ConfigurableApplicationContext ctx;
 
@@ -46,13 +49,12 @@ public class StockyApplication {
     public static void main(String[] args) {
         ctx=SpringApplication.run(StockyApplication.class, args);
     }
-    @EventListener(ApplicationReadyEvent.class)
+   /* @EventListener(ApplicationReadyEvent.class)
     public void triggerMail() throws MessagingException {
         senderService.sendSimpleEmail("lailaesseddyqy@gmail.com",
                 "This is email body",
                 "This is email subject");
-
-    }
+    }*/
 
     @Bean
     RestTemplate restTemplate() {
