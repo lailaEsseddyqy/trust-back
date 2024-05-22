@@ -1,0 +1,77 @@
+<!-- db/changelog-1.1-container.xml -->
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+
+  <!-- Create Container Table -->
+    <changeSet id="1" author="your-name">
+    <createTable tableName="achat">
+      <column name="id" type="BIGINT">
+        <constraints primaryKey="true" nullable="false"/>
+      </column>
+        <column name="reference" type="VARCHAR(500)"/>
+        <column name="montant" type="NUMERIC"/>
+        <column name="date_commande" type="TIMESTAMP"/>
+        <column name="date_livraison" type="TIMESTAMP"/>
+
+        <column name="etat_achat_id" type="BIGINT">
+          <constraints nullable="false"/>
+        </column>
+        <column name="fournisseur_id" type="BIGINT">
+          <constraints nullable="false"/>
+        </column>
+        <column name="facture_id" type="BIGINT">
+          <constraints nullable="false"/>
+        </column>
+
+    </createTable>
+  </changeSet>
+
+    <!-- Add foreign key constraint -->
+  <changeSet id="2" author="your-name">
+      <addForeignKeyConstraint
+              baseTableName="achat"
+              baseColumnNames="etat_achat_id"
+              referencedTableName="etat_achat"
+              referencedColumnNames="id"
+              constraintName="fk_achat_etat_achat"/>
+      <addForeignKeyConstraint
+              baseTableName="achat"
+              baseColumnNames="fournisseur_id"
+              referencedTableName="fournisseur"
+              referencedColumnNames="id"
+              constraintName="fk_achat_fournisseur"/>
+      <addForeignKeyConstraint
+              baseTableName="achat"
+              baseColumnNames="facture_id"
+              referencedTableName="facture"
+              referencedColumnNames="id"
+              constraintName="fk_achat_facture"/>
+
+  </changeSet>
+
+    <!-- Create Sequence for ContainerType -->
+  <changeSet id="3" author="your-name">
+    <createSequence sequenceName="achat_seq" startValue="1" incrementBy="1"/>
+  </changeSet>
+
+  <!-- Load Data from CSV -->
+  <changeSet id="4" author="your-name">
+    <loadData
+            file="classpath:/db/migration/data/achat/Achat.csv"
+            tableName="achat">
+      <column name="id" type="NUMERIC"/>
+          <column name="reference" type="STRING"/>
+          <column name="montant" type="NUMERIC"/>
+          <column name="date_commande" type="TIMESTAMP"/>
+          <column name="date_livraison" type="TIMESTAMP"/>
+        <column name="etat_achat" type="BIGINT"/>
+        <column name="fournisseur" type="BIGINT"/>
+        <column name="facture" type="BIGINT"/>
+    </loadData>
+  </changeSet>
+
+
+</databaseChangeLog>

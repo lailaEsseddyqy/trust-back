@@ -1,0 +1,27 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+
+            <include file="classpath:db/migration/changelog/achat/EtatAchat.xml"/>
+        <include file="classpath:db/migration/changelog/projet/ProjetCollaborateur.xml"/>
+        <include file="classpath:db/migration/changelog/collaborateur/DomaineInterventionCollaborateur.xml"/>
+        <include file="classpath:db/migration/changelog/projet/Projet.xml"/>
+        <include file="classpath:db/migration/changelog/achat/Achat.xml"/>
+        <include file="classpath:db/migration/changelog/article/CategorieArticle.xml"/>
+        <include file="classpath:db/migration/changelog/article/Article.xml"/>
+        <include file="classpath:db/migration/changelog/achat/Facture.xml"/>
+        <include file="classpath:db/migration/changelog/projet/ProjetArticle.xml"/>
+        <include file="classpath:db/migration/changelog/achat/TypeFacture.xml"/>
+        <include file="classpath:db/migration/changelog/collaborateur/DomaineIntervention.xml"/>
+        <include file="classpath:db/migration/changelog/projet/Piece.xml"/>
+        <include file="classpath:db/migration/changelog/collaborateur/Collaborateur.xml"/>
+        <include file="classpath:db/migration/changelog/article/EtatArticle.xml"/>
+        <include file="classpath:db/migration/changelog/achat/AchatDetail.xml"/>
+        <include file="classpath:db/migration/changelog/commun/Societe.xml"/>
+        <include file="classpath:db/migration/changelog/article/Marque.xml"/>
+        <include file="classpath:db/migration/changelog/commun/Fournisseur.xml"/>
+        <include file="classpath:db/migration/changelog/commun/Client.xml"/>
+        <include file="classpath:db/migration/changelog/projet/EtatAvancement.xml"/>
+
+</databaseChangeLog>

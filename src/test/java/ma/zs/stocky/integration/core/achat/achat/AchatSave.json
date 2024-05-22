@@ -1,0 +1,33 @@
+{
+    "reference": "reference-1",
+    "montant": "10",
+    "etatAchat": {"id": "1"},
+    "fournisseur": {"id": "1"},
+    "facture": {"id": "1"},
+
+    "achatDetails": [
+        {
+            "prix":"10",
+            "qte":"10",
+            "article":{"id": "1"}
+        },
+        {
+            "prix":"20",
+            "qte":"20",
+            "article":{"id": "2"}
+        },
+        {
+            "prix":"30",
+            "qte":"30",
+            "article":{"id": "3"}
+        }
+    ]
+}
+
+
+
+
+
+
+
+

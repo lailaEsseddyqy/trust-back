@@ -1,0 +1,41 @@
+{
+    "reference": "reference-1",
+    "nom": "nom-1",
+    "budet": "10",
+    "client": {"id": "1"},
+    "pieceJoint": {"id": "1"},
+    "nomChefProjet": "nomChefProjet-1",
+    "etatAvancement": {"id": "1"},
+    "description": "description-1",
+
+    "projetCollaborateurs": [
+        {
+            "collaborateur":{"id": "1"}
+        },
+        {
+            "collaborateur":{"id": "2"}
+        },
+        {
+            "collaborateur":{"id": "3"}
+        }
+    ],
+    "projetArticles": [
+        {
+            "article":{"id": "1"}
+        },
+        {
+            "article":{"id": "2"}
+        },
+        {
+            "article":{"id": "3"}
+        }
+    ]
+}
+
+
+
+
+
+
+
+

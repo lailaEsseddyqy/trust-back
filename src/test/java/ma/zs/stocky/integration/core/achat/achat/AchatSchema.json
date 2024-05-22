@@ -1,0 +1,33 @@
+{
+    "reference": "#string",
+    "montant": "#number",
+    "etatAchat": {"id": "#number"},
+    "fournisseur": {"id": "#number"},
+    "facture": {"id": "#number"},
+
+    "achatDetails": [
+      {
+        "prix":"#number",}
+        "qte":"#number",}
+        "article":{"id": "#number"}}
+      },
+      {
+        "prix":"#number",}
+        "qte":"#number",}
+        "article":{"id": "#number"}}
+      },
+      {
+        "prix":"#number",}
+        "qte":"#number",}
+        "article":{"id": "#number"}}
+      }
+    ]
+}
+
+
+
+
+
+
+
+

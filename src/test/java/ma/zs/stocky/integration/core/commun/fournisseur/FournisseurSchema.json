@@ -1,0 +1,18 @@
+{
+    "code": "#string",
+    "nom": "#string",
+    "numeroTelephone": "#string",
+    "adresse": "#string",
+    "email": "#string",
+    "rib": "#string",
+    "societe": {"id": "#number"}
+
+}
+
+
+
+
+
+
+
+

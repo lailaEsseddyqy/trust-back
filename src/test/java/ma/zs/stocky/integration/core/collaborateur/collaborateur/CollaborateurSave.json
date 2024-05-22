@@ -1,0 +1,28 @@
+{
+    "nom": "nom-1",
+    "ref": "ref-1",
+    "poste": "poste-1",
+    "numeroTelephone": "numeroTelephone-1",
+    "adresse": "adresse-1",
+    "email": "email-1",
+
+    "domaineInterventionCollaborateurs": [
+        {
+            "domaineIntervention":{"id": "1"}
+        },
+        {
+            "domaineIntervention":{"id": "2"}
+        },
+        {
+            "domaineIntervention":{"id": "3"}
+        }
+    ]
+}
+
+
+
+
+
+
+
+

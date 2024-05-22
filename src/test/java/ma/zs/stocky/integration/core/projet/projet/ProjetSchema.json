@@ -1,0 +1,41 @@
+{
+    "reference": "#string",
+    "nom": "#string",
+    "budet": "#number",
+    "client": {"id": "#number"},
+    "pieceJoint": {"id": "#number"},
+    "nomChefProjet": "#string",
+    "etatAvancement": {"id": "#number"},
+    "description": "#string",
+
+    "projetCollaborateurs": [
+      {
+        "collaborateur":{"id": "#number"}}
+      },
+      {
+        "collaborateur":{"id": "#number"}}
+      },
+      {
+        "collaborateur":{"id": "#number"}}
+      }
+    ],
+    "projetArticles": [
+      {
+        "article":{"id": "#number"}}
+      },
+      {
+        "article":{"id": "#number"}}
+      },
+      {
+        "article":{"id": "#number"}}
+      }
+    ]
+}
+
+
+
+
+
+
+
+

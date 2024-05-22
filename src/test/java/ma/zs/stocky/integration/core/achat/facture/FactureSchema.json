@@ -1,0 +1,17 @@
+{
+    "reference": "#string",
+    "montantHt": "#number",
+    "montantTtc": "#number",
+    "montantTva": "#number",
+    "remise": "#number",
+    "typeFacture": {"id": "#number"}
+
+}
+
+
+
+
+
+
+
+

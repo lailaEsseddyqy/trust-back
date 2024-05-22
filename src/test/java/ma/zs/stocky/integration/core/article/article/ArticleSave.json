@@ -1,0 +1,23 @@
+{
+    "type": "type-1",
+    "reference": "reference-1",
+    "uniteVente": "uniteVente-1",
+    "quantite": "10",
+    "quantiteAlerte": "10",
+    "categorieArticle": {"id": "1"},
+    "prixAchat": "10",
+    "prixVente": "10",
+    "etatArticle": {"id": "1"},
+    "description": "description-1",
+    "marque": {"id": "1"},
+    "fournisseur": {"id": "1"}
+
+}
+
+
+
+
+
+
+
+

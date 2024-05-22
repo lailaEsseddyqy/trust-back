@@ -1,0 +1,63 @@
+<!-- db/changelog-1.1-container.xml -->
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+
+  <!-- Create Container Table -->
+    <changeSet id="1" author="your-name">
+    <createTable tableName="achat_detail">
+      <column name="id" type="BIGINT">
+        <constraints primaryKey="true" nullable="false"/>
+      </column>
+        <column name="prix" type="NUMERIC"/>
+        <column name="qte" type="NUMERIC"/>
+
+        <column name="article_id" type="BIGINT">
+          <constraints nullable="false"/>
+        </column>
+        <column name="achat_id" type="BIGINT">
+          <constraints nullable="false"/>
+        </column>
+
+    </createTable>
+  </changeSet>
+
+    <!-- Add foreign key constraint -->
+  <changeSet id="2" author="your-name">
+      <addForeignKeyConstraint
+              baseTableName="achat_detail"
+              baseColumnNames="article_id"
+              referencedTableName="article"
+              referencedColumnNames="id"
+              constraintName="fk_achat_detail_article"/>
+      <addForeignKeyConstraint
+              baseTableName="achat_detail"
+              baseColumnNames="achat_id"
+              referencedTableName="achat"
+              referencedColumnNames="id"
+              constraintName="fk_achat_detail_achat"/>
+
+  </changeSet>
+
+    <!-- Create Sequence for ContainerType -->
+  <changeSet id="3" author="your-name">
+    <createSequence sequenceName="achat_detail_seq" startValue="1" incrementBy="1"/>
+  </changeSet>
+
+  <!-- Load Data from CSV -->
+  <changeSet id="4" author="your-name">
+    <loadData
+            file="classpath:/db/migration/data/achat/AchatDetail.csv"
+            tableName="achat_detail">
+      <column name="id" type="NUMERIC"/>
+          <column name="prix" type="NUMERIC"/>
+          <column name="qte" type="NUMERIC"/>
+        <column name="article" type="BIGINT"/>
+        <column name="achat" type="BIGINT"/>
+    </loadData>
+  </changeSet>
+
+
+</databaseChangeLog>

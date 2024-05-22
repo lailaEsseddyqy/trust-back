@@ -1,0 +1,23 @@
+{
+    "type": "#string",
+    "reference": "#string",
+    "uniteVente": "#string",
+    "quantite": "#number",
+    "quantiteAlerte": "#number",
+    "categorieArticle": {"id": "#number"},
+    "prixAchat": "#number",
+    "prixVente": "#number",
+    "etatArticle": {"id": "#number"},
+    "description": "#string",
+    "marque": {"id": "#number"},
+    "fournisseur": {"id": "#number"}
+
+}
+
+
+
+
+
+
+
+
