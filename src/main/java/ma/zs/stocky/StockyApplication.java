@@ -9,6 +9,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.client.RestTemplate;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,15 +28,33 @@ import ma.zs.stocky.zynerator.security.service.facade.*;
 import ma.zs.stocky.zynerator.security.bean.User;
 import ma.zs.stocky.zynerator.security.bean.Role;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
+
+import javax.mail.MessagingException;
+
 @SpringBootApplication
 //@EnableFeignClients
+@EnableScheduling
+
 public class StockyApplication {
     public static ConfigurableApplicationContext ctx;
+
+    @Autowired
+    private EmailSenderService senderService;
 
     public static void main(String[] args) {
         ctx=SpringApplication.run(StockyApplication.class, args);
     }
-
+   /* @EventListener(ApplicationReadyEvent.class)
+    public void triggerMail() throws MessagingException {
+        senderService.sendSimpleEmail("lailaesseddyqy@gmail.com",
+                "This is email body",
+                "This is email subject");
+    }*/
 
     @Bean
     RestTemplate restTemplate() {

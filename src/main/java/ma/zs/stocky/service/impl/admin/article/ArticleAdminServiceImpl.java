@@ -1,6 +1,7 @@
 package ma.zs.stocky.service.impl.admin.article;
 
 
+import ma.zs.stocky.EmailSenderService;
 import ma.zs.stocky.bean.core.projet.Projet;
 import ma.zs.stocky.bean.core.projet.ProjetArticle;
 import ma.zs.stocky.dao.facade.core.projet.ProjetDao;
@@ -35,6 +36,25 @@ import ma.zs.stocky.service.facade.admin.article.CategorieArticleAdminService ;
 @Service
 public class ArticleAdminServiceImpl implements ArticleAdminService {
 
+    public void checkArticleQuantities() {
+        List<Article> articles = dao.findAll();
+        for (Article article : articles) {
+            if (article.getQuantite().compareTo(article.getQuantiteAlerte()) < 0) {
+                sendAlertEmail(article);
+            }
+        }
+    }
+
+    @Autowired
+    private EmailSenderService emailSenderService;
+
+    private void sendAlertEmail(Article article) {
+        String toEmail = "lailaesseddyqy@gmail.com";
+        String subject = "Alerte de Quantité d'Article";
+        String body = String.format("L'article %s (Référence: %s) a une quantité de %s, ce qui est inférieur à la quantité d'alerte de %s.",
+                article.getType(), article.getReference(), article.getQuantite(), article.getQuantiteAlerte());
+        emailSenderService.sendSimpleEmail(toEmail, subject, body);
+    }
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
     public Article update(Article t) {
         Article loadedItem = dao.findById(t.getId()).orElse(null);
