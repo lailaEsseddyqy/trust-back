@@ -36,10 +36,10 @@ public class UserServiceImpl extends AbstractServiceImpl<User, UserCriteria, Use
         if (foundedUserByUsername != null || foundedUserByEmail != null) return null;
         else {
             if (t.getPassword() == null || t.getPassword().isEmpty()) {
-            t.setPassword(bCryptPasswordEncoder.encode(t.getUsername()));
+                t.setPassword(bCryptPasswordEncoder.encode(t.getUsername()));
             }
             else {
-            t.setPassword(bCryptPasswordEncoder.encode(t.getPassword()));
+                t.setPassword(bCryptPasswordEncoder.encode(t.getPassword()));
             }
             //t.setPassword(bCryptPasswordEncoder.encode("123"));
             t.setAccountNonExpired(true);
@@ -95,7 +95,7 @@ public class UserServiceImpl extends AbstractServiceImpl<User, UserCriteria, Use
 
 
     public void updateWithAssociatedLists(User user){
-    if(user !=null && user.getId() != null){
+        if(user !=null && user.getId() != null){
             List<List<ModelPermissionUser>> resultModelPermissionUsers= modelPermissionUserService.getToBeSavedAndToBeDeleted(modelPermissionUserService.findByUserId(user.getId()),user.getModelPermissionUsers());
             modelPermissionUserService.delete(resultModelPermissionUsers.get(1));
             ListUtil.emptyIfNull(resultModelPermissionUsers.get(0)).forEach(e -> e.setUser(user));
@@ -104,7 +104,7 @@ public class UserServiceImpl extends AbstractServiceImpl<User, UserCriteria, Use
             roleUserService.delete(resultRoleUsers.get(1));
             ListUtil.emptyIfNull(resultRoleUsers.get(0)).forEach(e -> e.setUser(user));
             roleUserService.update(resultRoleUsers.get(0),true);
-    }
+        }
     }
 
 

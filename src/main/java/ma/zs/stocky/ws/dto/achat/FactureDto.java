@@ -28,6 +28,8 @@ public class FactureDto  extends AuditBaseDto {
     private TypeFactureDto typeFacture ;
     private ClientDto client ;
 
+    private boolean paid;
+
 
 
     public ClientDto getClient(){
@@ -102,6 +104,12 @@ public class FactureDto  extends AuditBaseDto {
     public void setRemise(BigDecimal remise){
         this.remise = remise;
     }
+
+    @Log
+    public boolean isPaid() {return paid;}
+    public void setPaid(boolean paid) {this.paid = paid;}
+
+
 
 
     public TypeFactureDto getTypeFacture(){
