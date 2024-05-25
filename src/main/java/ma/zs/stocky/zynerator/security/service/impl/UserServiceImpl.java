@@ -2,8 +2,10 @@ package ma.zs.stocky.zynerator.security.service.impl;
 
 
 import ma.zs.stocky.zynerator.security.bean.ModelPermissionUser;
+import ma.zs.stocky.zynerator.security.bean.Role;
 import ma.zs.stocky.zynerator.security.bean.RoleUser;
 import ma.zs.stocky.zynerator.security.bean.User;
+import ma.zs.stocky.zynerator.security.common.AuthoritiesConstants;
 import ma.zs.stocky.zynerator.security.dao.criteria.core.UserCriteria;
 import ma.zs.stocky.zynerator.security.dao.facade.core.UserDao;
 import ma.zs.stocky.zynerator.security.dao.specification.core.UserSpecification;
@@ -20,6 +22,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -45,12 +48,12 @@ public class UserServiceImpl extends AbstractServiceImpl<User, UserCriteria, Use
             t.setEnabled(true);
             t.setPasswordChanged(false);
             t.setCreatedAt(LocalDateTime.now());
-//            Role roleFor = roleService.findByAuthority(AuthoritiesConstants.);
-//            if(t.getRoleUsers()==null)
-//                t.setRoleUsers(new ArrayList<>());
-//
-//            t.getRoleUsers().add(roleFor);
-//
+            Role roleFor = roleService.findByAuthority(AuthoritiesConstants.ADMIN);
+            if(t.getRoleUsers()!=null)
+                t.setRoleUsers(new ArrayList<>());
+            RoleUser roleUser = new RoleUser();
+            roleUser.setRole(roleFor);
+            t.getRoleUsers().add(roleUser);
 //            if (t.getRoleUsers() != null) {
 //                Collection<Role> roles = new ArrayList<Role>();
 //                for (Role role : t.getRoles()) {

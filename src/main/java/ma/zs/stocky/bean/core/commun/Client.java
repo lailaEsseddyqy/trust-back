@@ -1,5 +1,6 @@
 package ma.zs.stocky.bean.core.commun;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 
@@ -33,6 +34,7 @@ public class Client  extends BaseEntity     {
     private String email;
     @Column(length = 500)
     private String poste;
+    private LocalDateTime dateInscription ;
 
     private Societe societe ;
 
@@ -97,6 +99,13 @@ public class Client  extends BaseEntity     {
     public void setPoste(String poste){
         this.poste = poste;
     }
+    public LocalDateTime getDateInscription() {
+        return dateInscription;
+    }
+
+    public void setDateInscription(LocalDateTime dateInscription) {
+        this.dateInscription = dateInscription;
+    }
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "societe")
     public Societe getSociete(){
@@ -105,6 +114,8 @@ public class Client  extends BaseEntity     {
     public void setSociete(Societe societe){
         this.societe = societe;
     }
+
+
 
     @Transient
     public String getLabel() {
