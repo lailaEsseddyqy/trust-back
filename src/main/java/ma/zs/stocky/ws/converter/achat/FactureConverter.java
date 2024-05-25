@@ -1,5 +1,6 @@
 package  ma.zs.stocky.ws.converter.achat;
 
+import ma.zs.stocky.ws.converter.commun.ClientConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.beans.BeanUtils;
@@ -24,6 +25,10 @@ public class FactureConverter {
     @Autowired
     private TypeFactureConverter typeFactureConverter ;
     private boolean typeFacture;
+    @Autowired
+    private ClientConverter clientConverter ;
+    private boolean client;
+
 
     public  FactureConverter() {
         initObject(true);
@@ -53,6 +58,8 @@ public class FactureConverter {
                 item.setRemise(dto.getRemise());
             if(this.typeFacture && dto.getTypeFacture()!=null)
                 item.setTypeFacture(typeFactureConverter.toItem(dto.getTypeFacture())) ;
+            if(this.client && dto.getClient()!=null)
+                item.setClient(clientConverter.toItem(dto.getClient())) ;
 
 
 
@@ -84,8 +91,10 @@ public class FactureConverter {
             if(StringUtil.isNotEmpty(item.getRemise()))
                 dto.setRemise(item.getRemise());
             if(this.typeFacture && item.getTypeFacture()!=null) {
-                dto.setTypeFacture(typeFactureConverter.toDto(item.getTypeFacture())) ;
-
+                dto.setTypeFacture(typeFactureConverter.toDto(item.getTypeFacture()));
+            }
+            if(this.client && item.getClient()!=null) {
+                    dto.setClient(clientConverter.toDto(item.getClient())) ;
             }
 
 
@@ -99,6 +108,7 @@ public class FactureConverter {
 
     public void initObject(boolean value) {
         this.typeFacture = value;
+        this.client = value;
     }
 	
     public List<Facture> toItem(List<FactureDto> dtos) {
@@ -127,6 +137,8 @@ public class FactureConverter {
 		BeanUtils.copyProperties(dto, t, AbstractConverterHelper.getNullPropertyNames(dto));
         if (dto.getTypeFacture() != null)
         typeFactureConverter.copy(dto.getTypeFacture(), t.getTypeFacture());
+        if (dto.getClient() != null)
+            clientConverter.copy(dto.getClient(), t.getClient());
     }
 
     public List<Facture> copy(List<FactureDto> dtos) {
@@ -148,10 +160,24 @@ public class FactureConverter {
     public void setTypeFactureConverter(TypeFactureConverter typeFactureConverter ){
         this.typeFactureConverter = typeFactureConverter;
     }
+
+    public ClientConverter getClientConverter(){
+        return this.clientConverter;
+    }
+    public void setClientConverter(ClientConverter clientConverter ){
+        this.clientConverter = clientConverter;
+    }
     public boolean  isTypeFacture(){
         return this.typeFacture;
     }
     public void  setTypeFacture(boolean typeFacture){
         this.typeFacture = typeFacture;
+    }
+
+    public boolean  isClient(){
+        return this.client;
+    }
+    public void  setClient(boolean client){
+        this.client = client;
     }
 }

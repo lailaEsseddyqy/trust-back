@@ -1,5 +1,6 @@
 package  ma.zs.stocky.ws.dto.achat;
 
+import ma.zs.stocky.ws.dto.commun.ClientDto;
 import ma.zs.stocky.zynerator.audit.Log;
 import ma.zs.stocky.zynerator.dto.AuditBaseDto;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -25,7 +26,17 @@ public class FactureDto  extends AuditBaseDto {
     private BigDecimal remise  ;
 
     private TypeFactureDto typeFacture ;
+    private ClientDto client ;
 
+
+
+    public ClientDto getClient(){
+        return this.client;
+    }
+
+    public void setClient(ClientDto client){
+        this.client = client;
+    }
 
 
     public FactureDto(){

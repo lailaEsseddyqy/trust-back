@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import ma.zs.stocky.bean.core.commun.Client;
 import ma.zs.stocky.zynerator.bean.BaseEntity;
 import jakarta.persistence.*;
 import java.util.Objects;
@@ -35,6 +36,7 @@ public class Facture  extends BaseEntity     {
     private BigDecimal remise = BigDecimal.ZERO;
 
     private TypeFacture typeFacture ;
+    private Client client;
 
 
     public Facture(){
@@ -103,6 +105,15 @@ public class Facture  extends BaseEntity     {
     }
     public void setTypeFacture(TypeFacture typeFacture){
         this.typeFacture = typeFacture;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "client")
+    public Client getClient() {
+        return client;
+    }
+    public void setClient(Client client) {
+        this.client = client;
     }
 
 

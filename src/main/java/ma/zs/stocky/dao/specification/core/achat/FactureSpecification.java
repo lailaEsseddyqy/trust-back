@@ -20,6 +20,10 @@ public class FactureSpecification extends  AbstractSpecification<FactureCriteria
         addPredicateFk("typeFacture","id", criteria.getTypeFacture()==null?null:criteria.getTypeFacture().getId());
         addPredicateFk("typeFacture","id", criteria.getTypeFactures());
         addPredicateFk("typeFacture","code", criteria.getTypeFacture()==null?null:criteria.getTypeFacture().getCode());
+
+        addPredicateFk("client","id", criteria.getClient()==null?null:criteria.getClient().getId());
+        addPredicateFk("client","id", criteria.getClients());
+        addPredicateFk("client","code", criteria.getClient()==null?null:criteria.getClient().getCode());
     }
 
     public FactureSpecification(FactureCriteria criteria) {

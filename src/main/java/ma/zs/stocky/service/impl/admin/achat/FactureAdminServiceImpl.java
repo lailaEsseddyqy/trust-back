@@ -1,6 +1,8 @@
 package ma.zs.stocky.service.impl.admin.achat;
 
 
+import ma.zs.stocky.bean.core.projet.Projet;
+import ma.zs.stocky.service.facade.admin.commun.ClientAdminService;
 import ma.zs.stocky.zynerator.exception.EntityNotFoundException;
 import ma.zs.stocky.bean.core.achat.Facture;
 import ma.zs.stocky.dao.criteria.core.achat.FactureCriteria;
@@ -117,6 +119,16 @@ public class FactureAdminServiceImpl implements FactureAdminService {
         return ((Long) dao.count(mySpecification)).intValue();
     }
 
+    public List<Facture> findByClientId(Long id){
+        return dao.findByClientId(id);
+    }
+    public int deleteByClientId(Long id){
+        return dao.deleteByClientId(id);
+    }
+    public long countByClientCode(String code){
+        return dao.countByClientCode(code);
+    }
+
     public List<Facture> findByTypeFactureId(Long id){
         return dao.findByTypeFactureId(id);
     }
@@ -230,6 +242,7 @@ public class FactureAdminServiceImpl implements FactureAdminService {
     }
     public void findOrSaveAssociatedObject(Facture t){
         if( t != null) {
+            t.setClient(clientService.findOrSave(t.getClient()));
             t.setTypeFacture(typeFactureService.findOrSave(t.getTypeFacture()));
         }
     }
@@ -261,7 +274,8 @@ public class FactureAdminServiceImpl implements FactureAdminService {
 
 
 
-
+    @Autowired
+    private ClientAdminService clientService ;
     @Autowired
     private TypeFactureAdminService typeFactureService ;
 

@@ -2,6 +2,7 @@ package ma.zs.stocky.service.facade.admin.achat;
 
 import java.util.List;
 import ma.zs.stocky.bean.core.achat.Facture;
+import ma.zs.stocky.bean.core.projet.Projet;
 import ma.zs.stocky.dao.criteria.core.achat.FactureCriteria;
 import ma.zs.stocky.zynerator.service.IService;
 
@@ -18,6 +19,9 @@ public interface FactureAdminService {
 
 
 
+    List<Facture> findByClientId(Long id);
+    int deleteByClientId(Long id);
+    long countByClientCode(String code);
 
 	Facture create(Facture t);
 
