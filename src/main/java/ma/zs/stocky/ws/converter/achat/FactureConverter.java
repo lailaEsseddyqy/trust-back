@@ -51,6 +51,8 @@ public class FactureConverter {
                 item.setMontantTva(dto.getMontantTva());
             if(StringUtil.isNotEmpty(dto.getRemise()))
                 item.setRemise(dto.getRemise());
+
+            item.setPaid(dto.isPaid());
             if(this.typeFacture && dto.getTypeFacture()!=null)
                 item.setTypeFacture(typeFactureConverter.toItem(dto.getTypeFacture())) ;
 
@@ -83,9 +85,10 @@ public class FactureConverter {
                 dto.setMontantTva(item.getMontantTva());
             if(StringUtil.isNotEmpty(item.getRemise()))
                 dto.setRemise(item.getRemise());
+
+            dto.setPaid(item.isPaid());
             if(this.typeFacture && item.getTypeFacture()!=null) {
                 dto.setTypeFacture(typeFactureConverter.toDto(item.getTypeFacture())) ;
-
             }
 
 

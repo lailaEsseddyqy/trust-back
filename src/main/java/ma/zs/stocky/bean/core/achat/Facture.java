@@ -35,6 +35,7 @@ public class Facture  extends BaseEntity     {
     private BigDecimal remise = BigDecimal.ZERO;
 
     private TypeFacture typeFacture ;
+    private boolean paid;
 
 
     public Facture(){
@@ -96,6 +97,11 @@ public class Facture  extends BaseEntity     {
     public void setRemise(BigDecimal remise){
         this.remise = remise;
     }
+
+    public boolean isPaid() {return paid;}
+
+    public void setPaid(boolean paid) {this.paid = paid;}
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "type_facture")
     public TypeFacture getTypeFacture(){

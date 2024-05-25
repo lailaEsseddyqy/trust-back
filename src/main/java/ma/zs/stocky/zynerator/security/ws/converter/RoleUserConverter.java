@@ -29,7 +29,7 @@ public class RoleUserConverter extends AbstractConverter<RoleUser, RoleUserDto> 
         if (dto == null) {
             return null;
         } else {
-        RoleUser item = new RoleUser();
+            RoleUser item = new RoleUser();
             if(StringUtil.isNotEmpty(dto.getId()))
                 item.setId(dto.getId());
             if(this.role && dto.getRole()!=null &&  dto.getRole().getId() != null)
@@ -44,7 +44,7 @@ public class RoleUserConverter extends AbstractConverter<RoleUser, RoleUserDto> 
 
 
 
-        return item;
+            return item;
         }
     }
 
@@ -56,15 +56,15 @@ public class RoleUserConverter extends AbstractConverter<RoleUser, RoleUserDto> 
             RoleUserDto dto = new RoleUserDto();
             if(StringUtil.isNotEmpty(item.getId()))
                 dto.setId(item.getId());
-        if(this.role && item.getRole()!=null) {
-            dto.setRole(roleConverter.toDto(item.getRole())) ;
-        }
-        if(this.user && item.getUser()!=null) {
-            dto.setUser(utilisateurConverter.toDto(item.getUser())) ;
-        }
+            if(this.role && item.getRole()!=null) {
+                dto.setRole(roleConverter.toDto(item.getRole())) ;
+            }
+            if(this.user && item.getUser()!=null) {
+                dto.setUser(utilisateurConverter.toDto(item.getUser())) ;
+            }
 
 
-        return dto;
+            return dto;
         }
     }
 
