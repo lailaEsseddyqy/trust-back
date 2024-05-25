@@ -26,7 +26,7 @@ public class ProjetArticle  extends BaseEntity     {
 
     private Article article ;
     private Projet projet ;
-    private BigDecimal gteUtilisee;
+
 
 
     public ProjetArticle(){
@@ -62,10 +62,6 @@ public class ProjetArticle  extends BaseEntity     {
     public void setProjet(Projet projet){
         this.projet = projet;
     }
-
-    public BigDecimal getGteUtilisee() {return gteUtilisee;}
-
-    public void setGteUtilisee(BigDecimal gteUtilisee) {this.gteUtilisee = gteUtilisee;}
 
     @Override
     public boolean equals(Object o) {

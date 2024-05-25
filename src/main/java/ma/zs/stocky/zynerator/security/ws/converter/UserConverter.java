@@ -39,7 +39,7 @@ public class UserConverter extends AbstractConverter<User, UserDto> {
         if (dto == null) {
             return null;
         } else {
-        User item = new User();
+            User item = new User();
             if(StringUtil.isNotEmpty(dto.getId()))
                 item.setId(dto.getId());
             if(dto.getCredentialsNonExpired() != null)
@@ -74,7 +74,7 @@ public class UserConverter extends AbstractConverter<User, UserDto> {
             if(this.roleUsers && ListUtil.isNotEmpty(dto.getRoleUsers()))
                 item.setRoleUsers(roleUserConverter.toItem(dto.getRoleUsers()));
 
-        return item;
+            return item;
         }
     }
 
@@ -102,20 +102,20 @@ public class UserConverter extends AbstractConverter<User, UserDto> {
                 dto.setPassword(item.getPassword());
             if(StringUtil.isNotEmpty(item.getPasswordChanged()))
                 dto.setPasswordChanged(item.getPasswordChanged());
-        if(this.modelPermissionUsers && ListUtil.isNotEmpty(item.getModelPermissionUsers())){
-            modelPermissionUserConverter.init(true);
-            modelPermissionUserConverter.setUser(false);
-            dto.setModelPermissionUsers(modelPermissionUserConverter.toDto(item.getModelPermissionUsers()));
-            modelPermissionUserConverter.setUser(true);
+            if(this.modelPermissionUsers && ListUtil.isNotEmpty(item.getModelPermissionUsers())){
+                modelPermissionUserConverter.init(true);
+                modelPermissionUserConverter.setUser(false);
+                dto.setModelPermissionUsers(modelPermissionUserConverter.toDto(item.getModelPermissionUsers()));
+                modelPermissionUserConverter.setUser(true);
 
-        }
-        if(this.roleUsers && ListUtil.isNotEmpty(item.getRoleUsers())){
-            roleUserConverter.init(true);
-            roleUserConverter.setUser(false);
-            dto.setRoleUsers(roleUserConverter.toDto(item.getRoleUsers()));
-            roleUserConverter.setUser(true);
-        }
-        return dto;
+            }
+            if(this.roleUsers && ListUtil.isNotEmpty(item.getRoleUsers())){
+                roleUserConverter.init(true);
+                roleUserConverter.setUser(false);
+                dto.setRoleUsers(roleUserConverter.toDto(item.getRoleUsers()));
+                roleUserConverter.setUser(true);
+            }
+            return dto;
         }
     }
 

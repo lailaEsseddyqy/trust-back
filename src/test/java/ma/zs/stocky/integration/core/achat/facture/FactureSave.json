@@ -4,6 +4,7 @@
     "montantTtc": "10",
     "montantTva": "10",
     "remise": "10",
+    "paid": "false",
     "typeFacture": {"id": "1"}
 
 }
