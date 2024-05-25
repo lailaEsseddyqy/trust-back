@@ -34,9 +34,9 @@ public class JwtUtils {
         String jwt = JWT.create()
                 .withSubject(userPrincipal.getUsername())
                 .withClaim("email", userPrincipal.getEmail())
-                .withClaim("email", userPrincipal.getFirstName())
-                .withClaim("email", userPrincipal.getLastName())
-                .withClaim("email", userPrincipal.getPhone())
+                .withClaim("firstName", userPrincipal.getFirstName())
+                .withClaim("lastName", userPrincipal.getLastName())
+                .withClaim("phone", userPrincipal.getPhone())
                 .withArrayClaim("roles", roles.toArray(new String[roles.size()]))
                 .withExpiresAt(new Date(System.currentTimeMillis() + SecurityParams.EXPIRATION))
                 .sign(Algorithm.HMAC256(SecurityParams.SECRET));

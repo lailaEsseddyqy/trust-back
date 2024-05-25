@@ -49,7 +49,9 @@ public class ClientConverter {
                 item.setEmail(dto.getEmail());
             if(StringUtil.isNotEmpty(dto.getPoste()))
                 item.setPoste(dto.getPoste());
-            if(this.societe && dto.getSociete()!=null)
+            if(StringUtil.isNotEmpty(dto.getDateInscription()))
+                item.setDateInscription(DateUtil.stringEnToDate(dto.getDateInscription()));
+             if(this.societe && dto.getSociete()!=null)
                 item.setSociete(societeConverter.toItem(dto.getSociete())) ;
 
 
@@ -79,6 +81,8 @@ public class ClientConverter {
                 dto.setEmail(item.getEmail());
             if(StringUtil.isNotEmpty(item.getPoste()))
                 dto.setPoste(item.getPoste());
+            if(item.getDateInscription()!=null)
+                dto.setDateInscription(DateUtil.dateTimeToString(item.getDateInscription()));
             if(this.societe && item.getSociete()!=null) {
                 dto.setSociete(societeConverter.toDto(item.getSociete())) ;
 

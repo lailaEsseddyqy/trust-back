@@ -1,11 +1,11 @@
 package  ma.zs.stocky.ws.dto.commun;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import ma.zs.stocky.zynerator.audit.Log;
 import ma.zs.stocky.zynerator.dto.AuditBaseDto;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
-
-
+import java.time.LocalDateTime;
 
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -17,7 +17,7 @@ public class ClientDto  extends AuditBaseDto {
     private String adresse  ;
     private String email  ;
     private String poste  ;
-
+    private String dateInscription ;
     private SocieteDto societe ;
 
 
@@ -86,8 +86,14 @@ public class ClientDto  extends AuditBaseDto {
     }
 
 
+    @Log
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm")
 
+    public String getDateInscription() {
+        return dateInscription;
+    }
 
-
-
+    public void setDateInscription(String dateInscription) {
+        this.dateInscription = dateInscription;
+    }
 }
