@@ -1,6 +1,7 @@
 package ma.zs.stocky.service.impl.admin.commun;
 
 
+import ma.zs.stocky.bean.core.projet.Projet;
 import ma.zs.stocky.zynerator.exception.EntityNotFoundException;
 import ma.zs.stocky.bean.core.commun.Client;
 import ma.zs.stocky.dao.criteria.core.commun.ClientCriteria;
@@ -126,6 +127,7 @@ public class ClientAdminServiceImpl implements ClientAdminService {
     public long countBySocieteId(Long id){
         return dao.countBySocieteId(id);
     }
+
 
 	public boolean deleteById(Long id) {
         boolean condition = deleteByIdCheckCondition(id);
@@ -254,9 +256,6 @@ public class ClientAdminServiceImpl implements ClientAdminService {
     public List<Client> importExcel(MultipartFile file) {
         return null;
     }
-
-
-
 
 
 

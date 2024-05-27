@@ -2,6 +2,7 @@ package  ma.zs.stocky.dao.criteria.core.achat;
 
 
 
+import ma.zs.stocky.dao.criteria.core.commun.ClientCriteria;
 import ma.zs.stocky.zynerator.criteria.BaseCriteria;
 import java.util.List;
 import java.time.LocalDateTime;
@@ -30,11 +31,29 @@ public class FactureCriteria extends  BaseCriteria  {
     private String remiseMin;
     private String remiseMax;
 
+    private ClientCriteria client ;
+    private List<ClientCriteria> clients ;
+
     private TypeFactureCriteria typeFacture ;
     private List<TypeFactureCriteria> typeFactures ;
 
 
     public FactureCriteria(){}
+
+    public ClientCriteria getClient(){
+        return this.client;
+    }
+
+    public void setClient(ClientCriteria client){
+        this.client = client;
+    }
+    public List<ClientCriteria> getClients(){
+        return this.clients;
+    }
+
+    public void setClients(List<ClientCriteria> clients){
+        this.clients = clients;
+    }
 
     public String getReference(){
         return this.reference;
