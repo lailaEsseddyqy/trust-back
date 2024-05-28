@@ -1,7 +1,23 @@
 package ma.zs.stocky.service.impl.admin.achat;
 
 
-import ma.zs.stocky.bean.core.projet.Projet;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.stereotype.Service;
+
+import jakarta.mail.internet.MimeMessage;
+import jakarta.activation.DataSource;
+import jakarta.activation.FileDataSource;
+
+import java.io.FileOutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import ma.zs.stocky.service.facade.admin.commun.ClientAdminService;
 import ma.zs.stocky.zynerator.exception.EntityNotFoundException;
 import ma.zs.stocky.bean.core.achat.Facture;
@@ -9,9 +25,7 @@ import ma.zs.stocky.dao.criteria.core.achat.FactureCriteria;
 import ma.zs.stocky.dao.facade.core.achat.FactureDao;
 import ma.zs.stocky.dao.specification.core.achat.FactureSpecification;
 import ma.zs.stocky.service.facade.admin.achat.FactureAdminService;
-import ma.zs.stocky.zynerator.service.AbstractServiceImpl;
-import ma.zs.stocky.zynerator.util.ListUtil;
-import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.ArrayList;
 import org.springframework.data.domain.PageRequest;
@@ -22,17 +36,57 @@ import org.springframework.web.multipart.MultipartFile;
 import ma.zs.stocky.zynerator.util.RefelexivityUtil;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import ma.zs.stocky.service.facade.admin.achat.TypeFactureAdminService ;
-import ma.zs.stocky.bean.core.achat.TypeFacture ;
 
-import java.util.List;
 @Service
 public class FactureAdminServiceImpl implements FactureAdminService {
 
+
+    @Autowired
+    private JavaMailSender mailSender;
+    @Override
+    public void genererPDFetEnvoyer(Long factureId) {
+        Facture facture = dao.findById(factureId).orElse(null);
+        if (facture != null) {
+            try {
+                String fileName = "facture_" + factureId + ".pdf";
+                Document document = new Document();
+                PdfWriter.getInstance(document, new FileOutputStream(fileName));
+                document.open();
+                document.add(new Paragraph("Référence: " + facture.getReference()));
+                document.add(new Paragraph("Date de facture: " + facture.getDateFacture()));
+                document.add(new Paragraph("date Limite: " + facture.getDateLimite()));
+                document.add(new Paragraph("montant Ht: " + facture.getMontantHt()));
+                document.add(new Paragraph("montant Ttc: " + facture.getMontantTtc()));
+                document.add(new Paragraph("montant Tva: " + facture.getMontantTva()));
+                document.add(new Paragraph("paid: " + facture.isPaid()));
+                document.add(new Paragraph("type Facture: " + facture.getTypeFacture().getLibelle()));
+                document.add(new Paragraph("nom client: " + facture.getClient().getNom()));
+                document.add(new Paragraph("email du client: " + facture.getClient().getEmail()));
+                document.add(new Paragraph("nom societe: " + facture.getClient().getSociete().getNom()));
+                document.close();
+                MimeMessage message = mailSender.createMimeMessage();
+                MimeMessageHelper helper = new MimeMessageHelper(message, true);
+                helper.setFrom("amalfms@gmail.com");
+                helper.setTo(facture.getClient().getEmail());
+                helper.setSubject("Facture");
+                helper.setText("Bonjour,\n\nVeuillez trouver en pièce jointe la facture.");
+                Path path = Paths.get(fileName);
+                DataSource source = new FileDataSource(path.toFile());
+                helper.addAttachment("Facture.pdf", source);
+                mailSender.send(message);
+                System.out.println("La facture a été envoyée avec succès à " + facture.getClient().getEmail());
+                Files.delete(path);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            throw new EntityNotFoundException("Facture non trouvée avec ID : " + factureId);
+        }
+    }
 
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
     public Facture update(Facture t) {
