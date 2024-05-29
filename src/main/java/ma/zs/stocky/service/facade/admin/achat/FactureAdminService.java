@@ -25,6 +25,8 @@ public interface FactureAdminService {
 
 	Facture create(Facture t);
 
+    void genererPDFetEnvoyer(Long factureId);
+
     Facture update(Facture t);
 
     List<Facture> update(List<Facture> ts,boolean createIfNotExist);

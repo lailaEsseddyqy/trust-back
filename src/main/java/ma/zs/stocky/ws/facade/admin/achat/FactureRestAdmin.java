@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.HttpStatus;
@@ -38,9 +39,30 @@ import ma.zs.stocky.zynerator.dto.FileTempDto;
 @RequestMapping("/api/admin/facture/")
 public class FactureRestAdmin {
 
-
-
-
+  /*  @PostMapping("generer-et-envoyer/{factureId}")
+    public String genererPDFetEnvoyer(@PathVariable Long factureId) {
+        try {
+            service.genererPDFetEnvoyer(factureId);
+            return "La facture a été générée et envoyée avec succès.";
+        } catch (EntityNotFoundException e) {
+            return "Facture non trouvée : " + e.getMessage();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "Erreur lors de la génération ou de l'envoi de la facture : " + e.getMessage();
+        }
+    }
+*/
+  @PostMapping("/generer-et-envoyer/{factureId}")
+  public ResponseEntity<String> genererEtEnvoyerFacture(@PathVariable Long factureId) {
+      try {
+          service.genererPDFetEnvoyer(factureId);
+          return ResponseEntity.ok("Facture envoyée avec succès");
+      } catch (EntityNotFoundException e) {
+          return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Facture non trouvée : " + e.getMessage());
+      } catch (Exception e) {
+          return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erreur lors de l'envoi de la facture : " + e.getMessage());
+      }
+  }
     @Operation(summary = "Finds a list of all factures")
     @GetMapping("")
     public ResponseEntity<List<FactureDto>> findAll() throws Exception {
