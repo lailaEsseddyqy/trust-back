@@ -1,17 +1,19 @@
 package ma.zs.stocky.service.impl.responsableachat.article;
 
 
+import ma.zs.stocky.bean.core.projet.Projet;
+import ma.zs.stocky.bean.core.projet.ProjetArticle;
+import ma.zs.stocky.dao.facade.core.projet.ProjetDao;
 import ma.zs.stocky.zynerator.exception.EntityNotFoundException;
 import ma.zs.stocky.bean.core.article.Article;
 import ma.zs.stocky.dao.criteria.core.article.ArticleCriteria;
 import ma.zs.stocky.dao.facade.core.article.ArticleDao;
 import ma.zs.stocky.dao.specification.core.article.ArticleSpecification;
 import ma.zs.stocky.service.facade.responsableachat.article.ArticleResponsableachatService;
-import ma.zs.stocky.zynerator.service.AbstractServiceImpl;
-import ma.zs.stocky.zynerator.util.ListUtil;
 import org.springframework.stereotype.Service;
-import java.util.List;
-import java.util.ArrayList;
+
+import java.util.*;
+
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -25,17 +27,45 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import ma.zs.stocky.service.facade.responsableachat.article.EtatArticleResponsableachatService ;
-import ma.zs.stocky.bean.core.article.EtatArticle ;
 import ma.zs.stocky.service.facade.responsableachat.commun.FournisseurResponsableachatService ;
-import ma.zs.stocky.bean.core.commun.Fournisseur ;
 import ma.zs.stocky.service.facade.responsableachat.article.MarqueResponsableachatService ;
-import ma.zs.stocky.bean.core.article.Marque ;
 import ma.zs.stocky.service.facade.responsableachat.article.CategorieArticleResponsableachatService ;
-import ma.zs.stocky.bean.core.article.CategorieArticle ;
 
 import java.util.List;
+
 @Service
 public class ArticleResponsableachatServiceImpl implements ArticleResponsableachatService {
+
+    @Override
+    public List<Map<String, Object>> getUsedArticles() {
+        List<Projet> projets = projetDao.findAll();
+        List<Map<String, Object>> usedArticles = new ArrayList<>();
+        System.out.println("Total projects: " + projets.size());
+
+        for (Projet projet : projets) {
+            StringBuilder articlesInfo = new StringBuilder();
+            for (ProjetArticle projetArticle : projet.getProjetArticles()) {
+                Article article = projetArticle.getArticle();
+                if (article.getQuantite().compareTo(article.getQuantiteAlerte()) < 0) {
+                    System.out.println("Article used: " + article.getReference());
+
+                    articlesInfo.append(String.format("Article: %s, Quantité restante: %s; ",
+                            article.getReference(), article.getQuantite()));
+                }
+            }
+            if (articlesInfo.length() > 0) {
+                Map<String, Object> response = new HashMap<>();
+                response.put("projetId", projet.getId());
+                response.put("projetReference", projet.getReference());
+                response.put("articlesInfo", articlesInfo.toString());
+                usedArticles.add(response);
+            }
+        }
+
+        return usedArticles;
+    }
+
+
 
 
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
@@ -308,6 +338,7 @@ public class ArticleResponsableachatServiceImpl implements ArticleResponsableach
     private CategorieArticleResponsableachatService categorieArticleService ;
 
     private @Autowired ArticleDao dao;
+    private @Autowired ProjetDao projetDao;
 
 
 }

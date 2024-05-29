@@ -27,6 +27,8 @@ import org.springframework.web.bind.annotation.*;
 
 
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import ma.zs.stocky.zynerator.process.Result;
 
@@ -40,6 +42,10 @@ public class ArticleRestResponsableachat {
 
 
 
+    @GetMapping("used-articles")
+    public List<Map<String, Object>> getUsedArticles() {
+        return service.getUsedArticles();
+    }
 
     @Operation(summary = "Finds a list of all articles")
     @GetMapping("")

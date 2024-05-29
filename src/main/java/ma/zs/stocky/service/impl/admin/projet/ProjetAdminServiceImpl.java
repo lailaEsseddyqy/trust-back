@@ -13,8 +13,11 @@ import ma.zs.stocky.zynerator.util.ListUtil;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Map;
+
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -39,6 +42,35 @@ import ma.zs.stocky.service.facade.admin.commun.ClientAdminService ;
 public class ProjetAdminServiceImpl implements ProjetAdminService {
 
 
+
+   /* @Override
+    public List<Map<String, Object>> getUsedArticles() {
+        List<Projet> projets = dao.findAll();
+        List<Map<String, Object>> usedArticles = new ArrayList<>();
+        System.out.println("Total projects: " + projets.size());
+
+        for (Projet projet : projets) {
+            StringBuilder articlesInfo = new StringBuilder();
+            for (ProjetArticle projetArticle : projet.getProjetArticles()) {
+                Article article = projetArticle.getArticle();
+                if (article.getQuantite().compareTo(article.getQuantiteAlerte()) < 0) {
+                    System.out.println("Article used: " + article.getReference());
+
+                    articlesInfo.append(String.format("Article: %s, Quantité restante: %s; ",
+                            article.getReference(), article.getQuantite()));
+                }
+            }
+            if (articlesInfo.length() > 0) {
+                Map<String, Object> response = new HashMap<>();
+                response.put("projetId", projet.getId());
+                response.put("projetReference", projet.getReference());
+                response.put("articlesInfo", articlesInfo.toString());
+                usedArticles.add(response);
+            }
+        }
+
+        return usedArticles;
+    }*/
 
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
     public Projet update(Projet t) {

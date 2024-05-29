@@ -3,6 +3,7 @@ package ma.zs.stocky.zynerator.security.ws.converter;
 import ma.zs.stocky.zynerator.converter.AbstractConverter;
 import ma.zs.stocky.zynerator.security.bean.User;
 import ma.zs.stocky.zynerator.security.ws.dto.UserDto;
+import ma.zs.stocky.zynerator.util.DateUtil;
 import ma.zs.stocky.zynerator.util.ListUtil;
 import ma.zs.stocky.zynerator.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,7 +68,6 @@ public class UserConverter extends AbstractConverter<User, UserDto> {
 
             if(StringUtil.isNotEmpty(dto.getPhone()))
                 item.setPhone(dto.getPhone());
-
 
             if(this.modelPermissionUsers && ListUtil.isNotEmpty(dto.getModelPermissionUsers()))
                 item.setModelPermissionUsers(modelPermissionUserConverter.toItem(dto.getModelPermissionUsers()));

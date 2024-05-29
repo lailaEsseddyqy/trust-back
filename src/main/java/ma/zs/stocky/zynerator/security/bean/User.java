@@ -115,6 +115,7 @@ public class User  extends BaseEntity  implements UserDetails {
     this.updatedAt = updatedAt;
     }
 
+
     public String getEmail() {
     return email;
     }

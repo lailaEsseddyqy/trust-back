@@ -28,6 +28,8 @@ import org.springframework.web.bind.annotation.*;
 
 
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import ma.zs.stocky.zynerator.process.Result;
 
@@ -38,8 +40,6 @@ import ma.zs.stocky.zynerator.dto.FileTempDto;
 @RestController
 @RequestMapping("/api/admin/projet/")
 public class ProjetRestAdmin {
-
-
 
 
     @Operation(summary = "Finds a list of all projets")

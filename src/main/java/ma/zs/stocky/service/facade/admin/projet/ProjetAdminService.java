@@ -1,6 +1,7 @@
 package ma.zs.stocky.service.facade.admin.projet;
 
 import java.util.List;
+import java.util.Map;
 
 import ma.zs.stocky.bean.core.article.Article;
 import ma.zs.stocky.bean.core.projet.Projet;
@@ -29,6 +30,8 @@ public interface ProjetAdminService {
 
 	Projet create(Projet t);
 
+
+   // List<Map<String, Object>> getUsedArticles();
 
     Projet update(Projet t);
 

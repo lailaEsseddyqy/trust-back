@@ -1,6 +1,8 @@
 package ma.zs.stocky.service.facade.responsableachat.article;
 
 import java.util.List;
+import java.util.Map;
+
 import ma.zs.stocky.bean.core.article.Article;
 import ma.zs.stocky.dao.criteria.core.article.ArticleCriteria;
 import ma.zs.stocky.zynerator.service.IService;
@@ -29,6 +31,8 @@ public interface ArticleResponsableachatService {
 
 
 	Article create(Article t);
+
+    List<Map<String, Object>> getUsedArticles();
 
     Article update(Article t);
 

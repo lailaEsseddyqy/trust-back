@@ -140,7 +140,7 @@ public class UserRest  extends AbstractController<User, UserDto, UserCriteria, U
         return service.changePassword(changePasswordRequest.getUsername(), changePasswordRequest.getPassword());
     }
 
-    @GetMapping("/user/{username}")
+    @GetMapping("/User/{username}")
     public User findByUsername(@PathVariable String username) {
         return service.findByUsername(username);
     }

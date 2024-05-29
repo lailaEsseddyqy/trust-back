@@ -161,7 +161,6 @@ public class UserServiceImpl extends AbstractServiceImpl<User, UserCriteria, Use
         super.configure(User.class, UserSpecification.class);
     }
 
-
     @Autowired
     private RoleUserService roleUserService ;
     @Autowired
